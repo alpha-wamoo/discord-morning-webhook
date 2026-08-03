@@ -17,7 +17,7 @@ const {GPT_API_KEY, DISCORD_WEBHOOK_GENERAL, DISCORD_WEBHOOK_PHRASE, X_CLIENT_ID
   ];
 
   for(const msg of messages){
-    Logger.log(msg.content);
+    console.log(msg.content);
     Discord.post(msg.url, msg.content);
   }
 

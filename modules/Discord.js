@@ -12,7 +12,7 @@ export default class Discord{
    */
   static post(webhookUrl, msg){
     const msgObj = {content: msg};
-    UrlFetchApp.fetch(webhookUrl, {
+    fetch(webhookUrl, {
       "method": "POST",
       "headers": {'Content-type': "application/json"},
       "payload": JSON.stringify(msgObj)
