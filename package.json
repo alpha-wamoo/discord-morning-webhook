@@ -1,0 +1,10 @@
+{
+  "name": "discord-morning-bot",
+  "version": "1.0.0",
+  "description": "Discord morning message bot",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  }
+}
