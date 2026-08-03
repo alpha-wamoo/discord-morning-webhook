@@ -9,10 +9,11 @@ export default class Discord{
    * @static @method
    * @param {string} webhookUrl
    * @param {string} msg
+   * @returns {Promise<Response>}
    */
-  static post(webhookUrl, msg){
+  static async post(webhookUrl, msg){
     const msgObj = {content: msg};
-    fetch(webhookUrl, {
+    return fetch(webhookUrl, {
       "method": "POST",
       "headers": {'Content-type': "application/json"},
       "payload": JSON.stringify(msgObj)

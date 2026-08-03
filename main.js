@@ -18,11 +18,12 @@ const {GPT_API_KEY, DISCORD_WEBHOOK_GENERAL, DISCORD_WEBHOOK_PHRASE, X_CLIENT_ID
 
   console.log("webhook送信開始");
   for(const msg of messages){
-    console.log(msg.content);
-    Discord.post(msg.url, msg.content);
+    console.log(`post: ${msg.content}`);
+    const res = await Discord.post(msg.url, msg.content);
+    console.log(`webhook送信完了: ${res.status} ${res.statusText}`);
   }
-  console.log("webhook送信完了");
 
+  console.log("successfly sent all webhooks.");
   return null;
 })().catch(err => {
   console.log(`webhook送信失敗: ${err}`);
