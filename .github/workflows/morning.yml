@@ -1,0 +1,19 @@
+name: Morning Message
+
+on:
+  schedule:
+    - cron: "0 22 * * *" # UTC 22:00 = JST 7:00
+  workflow_dispatch:
+
+jobs:
+  send:
+    run-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+        
+      - run: npm install
+      - run: node index.js
