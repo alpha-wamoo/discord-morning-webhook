@@ -58,13 +58,16 @@ export default class OpenAI{
      * @returns {Promise<string>}
      */
     async call(messages){
+        console.log("OpenAI API呼び出し開始");
         const payload = this.createPayload(messages);
         const options = this.createOptions(payload);
 
         const response = await fetch(this._ENDPOINT, options);
+        console.log(`OpenAI API 応答: ${response.status} ${response.statusText}`);
         const json = /**@type {OpenAIResponse} */(JSON.parse(await response.text()));
 
         const reply = json.choices[0].message.content;
+        console.log("OpenAI API呼び出し完了");
         return reply;
     }
 }
