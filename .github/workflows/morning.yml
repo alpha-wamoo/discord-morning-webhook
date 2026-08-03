@@ -18,5 +18,9 @@ jobs:
       - run: npm install
       - run: npm post
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          GPT_API_KEY: ${{ secrets.GPT_API_KEY }}
+          GPT_API_KEY_V2: ${{ secrets.GPT_API_KEY_V2 }}
+          DISCORD_WEBHOOK_GENERAL: ${{ secrets.DISCORD_WEBHOOK_GENERAL }}
+          DISCORD_WEBHOOK_PHRASE: ${{ secrets.DISCORD_WEBHOOK_PHRASE }}
+          X_CLIENT_ID: ${{ secrets.X_CLIENT_ID }}
+          X_CLIENT_SECRET: ${{ secrets.X_CLIENT_SECRET }}
