@@ -22,4 +22,7 @@ const {GPT_API_KEY, DISCORD_WEBHOOK_GENERAL, DISCORD_WEBHOOK_PHRASE, X_CLIENT_ID
   }
 
   return null;
-})();
+})().catch(err => {
+  console.error(err);
+  Discord.post(DISCORD_WEBHOOK_GENERAL, `\`\`\`${err}\`\`\``);
+});
