@@ -4,9 +4,7 @@ import Discord from "./modules/Discord.js";
 /**@type {{[key: string]: string}} */
 const {GPT_API_KEY, DISCORD_WEBHOOK_GENERAL, DISCORD_WEBHOOK_PHRASE, X_CLIENT_ID, X_CLIENT_SECRET} = process.env;
 
-main();
-
-async function main(){
+(async function(){
   const ai = new OpenAI(GPT_API_KEY);
   const reply = await ai.call(
     { role: "system", content: "真剣で情熱的、社交的でテンションが高め、感情豊かで素直、協調性があり好奇心旺盛な大学生。絵文字、ビックリマーク、伸ばし棒を多用。ボケもツッコミも好き。「おはよう」ではなく「おはおはよう」と言う。誇張した奇抜な比喩表現が大好き。二人称は「あなた」。IRIAMでライバーをしている。" },
@@ -24,4 +22,4 @@ async function main(){
   }
 
   return null;
-}
+})();
