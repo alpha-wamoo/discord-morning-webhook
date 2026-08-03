@@ -16,10 +16,12 @@ const {GPT_API_KEY, DISCORD_WEBHOOK_GENERAL, DISCORD_WEBHOOK_PHRASE, X_CLIENT_ID
     {url: DISCORD_WEBHOOK_PHRASE, content: "詠め"}
   ];
 
+  console.log("webhook送信開始");
   for(const msg of messages){
     console.log(msg.content);
     Discord.post(msg.url, msg.content);
   }
+  console.log("webhook送信完了");
 
   return null;
 })().catch(err => {
