@@ -16,4 +16,7 @@ jobs:
           node-version: 22
         
       - run: npm install
-      - run: node index.js
+      - run: npm post
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
