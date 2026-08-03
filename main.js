@@ -1,5 +1,6 @@
 import OpenAI from "./modules/OpenAI.js";
 import Discord from "./modules/Discord.js";
+import Util from "./modules/Util.js";
 
 console.log("Secretsの初期化開始");
 /**@type {{[key: string]: string}} */
@@ -27,6 +28,7 @@ console.log("Secretsの初期化完了");
     console.log(`post: ${msg.content}`);
     const res = await Discord.post(msg.url, msg.content);
     console.log(`webhook送信完了: ${res.status} ${res.statusText}`);
+    await Util.sleep(1000); // 1秒待機
   }
 
   console.log("All successfully sent!");
