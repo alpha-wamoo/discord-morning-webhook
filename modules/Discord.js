@@ -14,9 +14,9 @@ export default class Discord{
   static async post(webhookUrl, msg){
     const msgObj = {content: msg};
     return fetch(webhookUrl, {
-      "method": "POST",
-      "headers": {'Content-type': "application/json"},
-      "payload": JSON.stringify(msgObj)
+      method: "POST",
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(msgObj)
     });
   }
 }
