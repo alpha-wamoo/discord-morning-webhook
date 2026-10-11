@@ -25,10 +25,14 @@ console.log("Secretsの初期化完了");
 
   console.log("webhook送信開始");
   for(const msg of messages){
-    console.log(`post: ${msg.content}`);
-    const res = await Discord.post(msg.url, msg.content);
-    console.log(`webhook送信完了: ${res.status} ${res.statusText}`);
-    await Util.sleep(1000); // 1秒待機
+    try{
+      console.log(`post: ${msg.content}`);
+      const res = await Discord.post(msg.url, msg.content);
+      console.log(`webhook送信完了: ${res.status} ${res.statusText}`);
+      await Util.sleep(1000); // 1秒待機
+    } catch (err) {
+      console.error(`webhook送信失敗: ${err}`);
+    }
   }
 
   console.log("All successfully sent!");
