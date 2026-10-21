@@ -1,5 +1,5 @@
 import LLM from "./modules/LLM.js";
-import OpenAI from "./modules/OpenAI.js";
+// import OpenAI from "./modules/OpenAI.js";
 import Discord from "./modules/Discord.js";
 import Util from "./modules/Util.js";
 
@@ -19,7 +19,8 @@ const AI_MESSAGES = [
 const ai = new LLM();
 
 (async function(){
-  const reply = await ai.talk(AI_MESSAGES, false);
+  const reply = (await ai.talk(AI_MESSAGES, false)).message.content;
+  console.log(`AIの返信: ${reply}`);
   const WEBHOOK_MESSAGES = [
     {url: DISCORD_WEBHOOK_GENERAL, content: ` @everyone\n${reply}`},
     {url: DISCORD_WEBHOOK_PHRASE, content: "## それでは今日の川柳を発表するねー！"},
