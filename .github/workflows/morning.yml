@@ -16,6 +16,7 @@ jobs:
           node-version: 22
         
       - run: npm install
+      - run: npm i ollama
       - run: npm start
         env:
           GPT_API_KEY: ${{ secrets.GPT_API_KEY }}
