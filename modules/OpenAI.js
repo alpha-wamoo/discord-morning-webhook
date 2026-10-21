@@ -7,6 +7,7 @@
 /**
  * - OpenAI APIを呼び出すためのクラス
  * @class AI
+ * @deprecated
  * @example
  * const ai = new AI(OPENAI_API_KEY);
  * const reply = await ai.call("Hello, how are you?");

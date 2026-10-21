@@ -1,0 +1,35 @@
+/**
+ * @import {ChatRequest, ChatResponse, Message} from "ollama"
+ */
+import { Ollama } from "ollama"
+
+/**
+ * @class LLM
+ */
+
+export default class LLM{
+    /**@private @type {string} */
+    _modelType = "qwen2.5:7b";
+    /**@private @type {Ollama} */
+    _ollama = new Ollama();
+
+    /**
+     * @constructor
+     */
+    constructor(model = "qwen2.5:7b"){
+        this._modelType = model;
+    }
+
+    /**@public @method
+     * @param {Message[] | undefined} messages
+     * @param {boolean | "high" | "medium" | "low"} think
+     * @returns {Promise<ChatResponse>}
+    */
+    talk(messages, think = false){
+        return this._ollama.chat({
+            model: this._modelType,
+            messages: messages,
+            think
+        });
+    }
+};
