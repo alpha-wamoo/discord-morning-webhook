@@ -6,16 +6,13 @@ import Logger from "./modules/Logger.js";
 
 Logger.fcall("initialize Secrets");
 /**@type {{[key: string]: string}} */
-const {GPT_API_KEY, GPT_API_KEY_V2, DISCORD_WEBHOOK_TEST, DISCORD_WEBHOOK_GENERAL, DISCORD_WEBHOOK_PHRASE, X_CLIENT_ID, X_CLIENT_SECRET, IS_DEBUG} = process.env;
-if(!GPT_API_KEY_V2 || !DISCORD_WEBHOOK_GENERAL || !DISCORD_WEBHOOK_PHRASE || !DISCORD_WEBHOOK_TEST){
+const {DISCORD_WEBHOOK_TEST, DISCORD_WEBHOOK_GENERAL, DISCORD_WEBHOOK_PHRASE, IS_DEBUG} = process.env;
+if(!DISCORD_WEBHOOK_GENERAL || !DISCORD_WEBHOOK_PHRASE || !DISCORD_WEBHOOK_TEST){
   Logger.error("One or more required environment variables are not set.");
   process.exit(1);
 }
 Logger.fexit("initialize Secrets");
 
-const AI_MESSAGES = [
-  
-];
 const ai = new LLM("discord-morning");
 
 (async function main(){
