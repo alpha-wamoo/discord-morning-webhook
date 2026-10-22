@@ -30,3 +30,4 @@ jobs:
           DISCORD_WEBHOOK_TEST: ${{ secrets.DISCORD_WEBHOOK_TEST }}
           X_CLIENT_ID: ${{ secrets.X_CLIENT_ID }}
           X_CLIENT_SECRET: ${{ secrets.X_CLIENT_SECRET }}
+          IS_DEBUG: ${{ vars.IS_DEBUG }}
