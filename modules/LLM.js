@@ -21,14 +21,15 @@ export default class LLM{
         this._modelType = model;
     }
 
-    /**@public @method
+    /**
+     * @public @async @method
      * @param {Message[] | undefined} messages
      * @param {boolean | "high" | "medium" | "low"} think
      * @returns {Promise<ChatResponse>}
     */
-    talk(messages, think = false){
+    async talk(messages, think = false){
         Logger.fcall("LLM.talk");
-        const res = this._ollama.chat({
+        const res = await this._ollama.chat({
             model: this._modelType,
             messages: messages,
             think
