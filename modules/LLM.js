@@ -10,7 +10,7 @@ import Logger from "./Logger.js";
 
 export default class LLM{
     /**@private @type {string} */
-    _modelType = null;
+    _modelType = "qwen2.5:7b";
     /**@private @type {Ollama} */
     _ollama = new Ollama();
 
@@ -31,7 +31,7 @@ export default class LLM{
         Logger.fcall("LLM.talk");
         const res = await this._ollama.chat({
             model: this._modelType,
-            messages: messages,
+            messages,
             think
         });
         Logger.fexit("LLM.talk");

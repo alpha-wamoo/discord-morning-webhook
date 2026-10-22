@@ -21,10 +21,14 @@ const ai = new LLM("discord-morning");
 (async function main(){
   Logger.fcall("main");
   const isDebug = Boolean(IS_DEBUG);
-  const AI_REQUESTS = loadAIRequests();
 
   if(isDebug) Logger.info("debug: Discordへのメッセージはテストチャンネルに送信されます");
-  const reply = (await ai.talk(AI_REQUESTS, false))?.message?.content;
+  const reply = (await ai.talk([
+    {
+      "role": "user",
+      "content": "インターネットの友達に送るための朝の挨拶を200文字程度で考えて。たまにめっちゃふざけた挨拶になる"
+    }
+  ], false))?.message?.content;
   Logger.info(`AIのセリフ: ${reply}`);
   const WEBHOOK_MESSAGES = [
     {url: DISCORD_WEBHOOK_GENERAL, content: ` @everyone\n${reply}`},
@@ -51,23 +55,3 @@ const ai = new LLM("discord-morning");
   Logger.error(`main | ${err}`);
   Discord.post(DISCORD_WEBHOOK_GENERAL, `\`\`\`${err}\`\`\``);
 });
-
-/**
- * @async @method
- * @returns {import("./json/Config.json")}
- */
-async function loadConfig(){
-  const response = await fetch("./json/Config.json");
-  const data = await response.json();
-  return data;
-}
-
-/**
- * @async @method
- * @returns {import("./json/AIRequestMessages.json")}
- */
-async function loadAIRequests(){
-  const response = await fetch("./json/AIRequestMessages.json");
-  const data = await response.json();
-  return data;
-}
