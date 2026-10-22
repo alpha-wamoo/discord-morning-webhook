@@ -16,6 +16,7 @@ jobs:
           node-version: 22
         
       - run: npm install
+      - run: curl -fsSL https://ollama.com/install.sh | sh
       - run: npm i ollama
       - run: ollama pull qwen2.5:7b
       - run: npm start
