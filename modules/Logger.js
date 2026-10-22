@@ -9,9 +9,9 @@ export default class Logger{
      * @returns {void}
      */
     static fcall(fName){
+        console.log(`${this.depthMergin}>> ${fName}`);
         this.depth++;
         this.depthMergin += "\t";
-        console.log(`${this.depthMergin}>> ${fName}`);
     }
 
     /**
@@ -20,9 +20,9 @@ export default class Logger{
      * @returns {void}
      */
     static fexit(fName){
-        console.log(`${this.depthMergin}<< ${fName}`);
         this.depth--;
         this.depthMergin = this.depthMergin.slice(0, -1);
+        console.log(`${this.depthMergin}<< ${fName}`);
     }
 
     /**

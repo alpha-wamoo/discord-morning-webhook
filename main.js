@@ -21,7 +21,7 @@ const ai = new LLM();
 
 (async function main(){
   Logger.fcall("main");
-  const reply = (await ai.talk(AI_MESSAGES, false)).message.content;
+  const reply = (await ai.talk(AI_MESSAGES, false))?.message?.content;
   Logger.info(`AIの返信: ${reply}`);
   const WEBHOOK_MESSAGES = [
     {url: DISCORD_WEBHOOK_GENERAL, content: ` @everyone\n${reply}`},
@@ -37,7 +37,7 @@ const ai = new LLM();
       Logger.info(`送信完了: ${res.status} ${res.statusText}`);
       await Util.sleep(1000); // 1秒待機
     } catch (err) {
-      Logger.error(`送信失敗: ${err.message}`);
+      Logger.error(`送信失敗: ${err}`);
     }
   }
   Logger.fexit("webhook送信");
@@ -45,6 +45,6 @@ const ai = new LLM();
   Logger.fexit("main");
   return null;
 })().catch(err => {
-  Logger.error(`webhook送信失敗: ${err}`);
+  Logger.error(`main | ${err}`);
   Discord.post(DISCORD_WEBHOOK_GENERAL, `\`\`\`${err}\`\`\``);
 });
