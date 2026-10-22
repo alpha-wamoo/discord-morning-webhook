@@ -6,23 +6,26 @@ import Logger from "./modules/Logger.js";
 
 Logger.fcall("initialize Secrets");
 /**@type {{[key: string]: string}} */
-const {GPT_API_KEY, GPT_API_KEY_V2, DISCORD_WEBHOOK_GENERAL, DISCORD_WEBHOOK_PHRASE, X_CLIENT_ID, X_CLIENT_SECRET} = process.env;
-if(!GPT_API_KEY_V2 || !DISCORD_WEBHOOK_GENERAL || !DISCORD_WEBHOOK_PHRASE){
+const {GPT_API_KEY, GPT_API_KEY_V2, DISCORD_WEBHOOK_TEST, DISCORD_WEBHOOK_GENERAL, DISCORD_WEBHOOK_PHRASE, X_CLIENT_ID, X_CLIENT_SECRET, IS_DEBUG} = process.env;
+if(!GPT_API_KEY_V2 || !DISCORD_WEBHOOK_GENERAL || !DISCORD_WEBHOOK_PHRASE || !DISCORD_WEBHOOK_TEST){
   Logger.error("One or more required environment variables are not set.");
   process.exit(1);
 }
 Logger.fexit("initialize Secrets");
 
 const AI_MESSAGES = [
-  { role: "system", content: "真剣で情熱的、社交的でテンションが高め、感情豊かで素直、協調性があり好奇心旺盛な大学生。絵文字、ビックリマーク、伸ばし棒を多用。ボケもツッコミも好き。「おはよう」ではなく「おはおはよう」と言う。誇張した奇抜な比喩表現が大好き。二人称は「あなた」。IRIAMでライバーをしている。" },
-  { role: "user", content: "インターネットの友達に送るための朝の挨拶を130文字程度で考えて。たまにめっちゃふざけた挨拶になる" }
+  
 ];
-const ai = new LLM();
+const ai = new LLM("discord-morning");
 
 (async function main(){
   Logger.fcall("main");
-  const reply = (await ai.talk(AI_MESSAGES, false))?.message?.content;
-  Logger.info(`AIの返信: ${reply}`);
+  const isDebug = Boolean(IS_DEBUG);
+  const AI_REQUESTS = loadAIRequests();
+
+  if(isDebug) Logger.info("debug: Discordへのメッセージはテストチャンネルに送信されます");
+  const reply = (await ai.talk(AI_REQUESTS, false))?.message?.content;
+  Logger.info(`AIのセリフ: ${reply}`);
   const WEBHOOK_MESSAGES = [
     {url: DISCORD_WEBHOOK_GENERAL, content: ` @everyone\n${reply}`},
     {url: DISCORD_WEBHOOK_PHRASE, content: "## それでは今日の川柳を発表するねー！"},
@@ -48,3 +51,23 @@ const ai = new LLM();
   Logger.error(`main | ${err}`);
   Discord.post(DISCORD_WEBHOOK_GENERAL, `\`\`\`${err}\`\`\``);
 });
+
+/**
+ * @async @method
+ * @returns {import("./json/Config.json")}
+ */
+async function loadConfig(){
+  const response = await fetch("./json/Config.json");
+  const data = await response.json();
+  return data;
+}
+
+/**
+ * @async @method
+ * @returns {import("./json/AIRequestMessages.json")}
+ */
+async function loadAIRequests(){
+  const response = await fetch("./json/AIRequestMessages.json");
+  const data = await response.json();
+  return data;
+}

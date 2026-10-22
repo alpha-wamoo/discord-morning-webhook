@@ -10,7 +10,7 @@ import Logger from "./Logger.js";
 
 export default class LLM{
     /**@private @type {string} */
-    _modelType = "qwen2.5:7b";
+    _modelType = null;
     /**@private @type {Ollama} */
     _ollama = new Ollama();
 

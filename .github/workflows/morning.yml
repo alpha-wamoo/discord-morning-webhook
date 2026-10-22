@@ -19,6 +19,7 @@ jobs:
       - run: curl -fsSL https://ollama.com/install.sh | sh
       - run: npm i ollama
       - run: ollama pull qwen2.5:7b
+      - run: ollama create discord-morning -f Ollama/discord-morning.modelfile
       - run: npm start
         env:
           GPT_API_KEY: ${{ secrets.GPT_API_KEY }}
