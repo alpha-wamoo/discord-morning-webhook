@@ -26,7 +26,7 @@ const ai = new LLM("discord-morning");
   const reply = (await ai.talk([
     {
       "role": "user",
-      "content": "インターネットの友達に送るための朝の挨拶を200文字程度で考えて。たまにめっちゃふざけた挨拶になる"
+      "content": "インターネットの友達に送るための朝の挨拶を300文字程度で考えて。たまにめっちゃふざけた挨拶になる"
     }
   ], false))?.message?.content;
   Logger.info(`AIのセリフ: ${reply}`);
