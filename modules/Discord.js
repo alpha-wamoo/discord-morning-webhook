@@ -1,3 +1,4 @@
+import Logger from "./Logger.js";
 /**
  * - DiscordのWebhookにメッセージを送信するためのクラス
  * @class Discord
@@ -12,11 +13,14 @@ export default class Discord{
    * @returns {Promise<Response>}
    */
   static async post(webhookUrl, msg){
+    Logger.fcall("Discord.post");
     const msgObj = {content: msg};
-    return fetch(webhookUrl, {
+    const res = await fetch(webhookUrl, {
       method: "POST",
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(msgObj)
     });
+    Logger.fexit("Discord.post");
+    return res;
   }
 }

@@ -1,7 +1,8 @@
 /**
  * @import {ChatRequest, ChatResponse, Message} from "ollama"
  */
-import { Ollama } from "ollama"
+import { Ollama } from "ollama";
+import Logger from "./Logger.js";
 
 /**
  * @class LLM
@@ -26,10 +27,13 @@ export default class LLM{
      * @returns {Promise<ChatResponse>}
     */
     talk(messages, think = false){
-        return this._ollama.chat({
+        Logger.fcall("LLM.talk");
+        const res = this._ollama.chat({
             model: this._modelType,
             messages: messages,
             think
         });
+        Logger.fexit("LLM.talk");
+        return res;
     }
 };
