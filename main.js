@@ -9,6 +9,9 @@ Logger.fcall("initialize Secrets");
 const {DISCORD_WEBHOOK_TEST, DISCORD_WEBHOOK_GENERAL, DISCORD_WEBHOOK_PHRASE, IS_DEBUG} = process.env;
 if(!DISCORD_WEBHOOK_GENERAL || !DISCORD_WEBHOOK_PHRASE || !DISCORD_WEBHOOK_TEST){
   Logger.error("One or more required environment variables are not set.");
+  if(!DISCORD_WEBHOOK_GENERAL) Logger.info("gen");
+  if(!DISCORD_WEBHOOK_PHRASE) Logger.info("ph");
+  if(!DISCORD_WEBHOOK_TEST) Logger.info("tst");
   process.exit(1);
 }
 Logger.fexit("initialize Secrets");
